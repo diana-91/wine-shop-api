@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const ORDER_STATE = require('./orders-state');
+const Schema   = mongoose.Schema;
 
-const orderSchema = new mongoose.schema({
+const orderSchema = new mongoose.Schema({
   numOrder: {
     type: Number,
     required: [true, 'The order number is required']
@@ -32,6 +33,7 @@ const orderSchema = new mongoose.schema({
     type: Number,
     required: [true, 'The order price is required']
   },
+},
   {
     timestamps: true,
     toJSON: {

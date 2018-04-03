@@ -26,8 +26,7 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   telephone: {
-    type: Number,
-    max: 9
+    type: Number
   },
   address: {
     type: String
