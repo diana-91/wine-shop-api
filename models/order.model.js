@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const ORDER_STATE = require('./orders-state');
 
 const orderSchema = new mongoose.schema({
+  numOrder: {
+    type: Number,
+    required: [true, 'The order number is required']
+  },
   _userId: {
     type: Schema.Types.ObjectId,
     required: [true, 'The user id is required']
