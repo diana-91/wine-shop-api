@@ -19,7 +19,17 @@ const productSchema = new mongoose.schema({
   category: [{
     type: String,
     enum: PRODUCT_TYPE
-  }]
+  }],
+  {
+    timestamps: true,
+    toJSON: {
+        transform: (doc, ret) => {
+            ret.id = doc._id;
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    }
 });
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

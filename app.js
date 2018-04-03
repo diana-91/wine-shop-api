@@ -11,7 +11,8 @@ const corsConfig = require('./configs/cors.config');
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
-const productRoutes = require('./routes/products.routes')
+const productsRoutes = require('./routes/products.routes');
+const ordersRoutes = require('./routes/orders.routes');
 const usersRoutes = require('./routes/users.routes');
 const sessionRoutes = require('./routes/session.routes');
 
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/products', productsRoutes);
+app.use('/orders', ordersRoutes);
 app.use('/users', usersRoutes);
 app.use('/session', sessionRoutes);
 
