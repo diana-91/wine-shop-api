@@ -4,9 +4,11 @@ const router = express.Router();
 const orderController = require('../controllers/orders.controller');
 const secureMiddleware = require('../middleware/secure.middleware');
 
-router.get('/', secureMiddleware.isAuthenticated, orderController.list);
-router.get('/:id', secureMiddleware.isAuthenticated, orderController.get);
-router.post('/', secureMiddleware.isAuthenticated, orderController.create);
-router.put('/:id', secureMiddleware.isAuthenticated, orderController.edit);
+router.get('/', orderController.list);
+router.get('/:id', orderController.get);
+router.post('/', orderController.create);
+router.put('/:id', orderController.edit);
+router.get('/search/:id', orderController.searchOrdersUser);
+
 
 module.exports = router;

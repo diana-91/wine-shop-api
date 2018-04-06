@@ -22,9 +22,10 @@ module.exports.get = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
+
   const product = new Product(req.body);
   if (req.file) {
-    product.image = `${req.protocol}://${req.get('host')}/products-image/${req.file.filename}`;
+    product.image = req.file.secure_url;
   }
   product.save()
     .then(() => {
@@ -45,10 +46,10 @@ module.exports.delete = (req, res, next) => {
     .then(product => {
       if (product) {
         res.status(204).json();
-        fs.unlink(`/public/products-image/${product.image}`, (err) => {
-          if (err) throw err;
-          console.log(`successfully deleted /public/products-image/${product.image}`);
-        });
+        // fs.unlink(`req.file.secure_url/${product.image}`, (err) => {
+        //   if (err) throw err;
+        //   console.log(`successfully deleted req.file.secure_url/${product.image}`);
+        // });
       } else {
         next(new ApiError(`Product not found`, 404));
       }
@@ -58,7 +59,7 @@ module.exports.delete = (req, res, next) => {
 module.exports.edit = (req, res, next) => {
   const id = req.params.id;
   if (req.file) {
-    body.image = `${req.protocol}://${req.get('host')}/products-image/${req.file.filename}`;
+    req.body.image = req.file.secure_url;
   }
 
   Product.findByIdAndUpdate(id, { $set: req.body }, { new: true })
@@ -69,6 +70,7 @@ module.exports.edit = (req, res, next) => {
         next(new ApiError(`Product not found`, 404));
       }
     }).catch(error => {
+
       if (error instanceof mongoose.Error.ValidationError) {
         next(new ApiError(error.message, 400, error.errors));
       } else {

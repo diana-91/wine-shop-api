@@ -1,29 +1,26 @@
 const mongoose = require('mongoose');
-const ORDER_STATE = require('./orders-state');
+const ORDER_STATE = require('./order-state');
 const Schema   = mongoose.Schema;
 
 const orderSchema = new mongoose.Schema({
-  numOrder: {
-    type: Number,
-    required: [true, 'The order number is required']
-  },
   _userId: {
     type: Schema.Types.ObjectId,
-    required: [true, 'The user id is required']
+    required: [true, 'The user id is required'],
+    ref: 'User'
   },
   _productId: [{
     type: Schema.Types.ObjectId,
-    required: [true, 'The product id is required']
+    required: [true, 'The product id is required'],
+    ref: 'Product'
   }],
   date: {
     type: Date,
-    default: Date.now,
-    required: [true, 'The order date is required']
+    default: Date.now
   },
-  amount: [{
+  amount: {
     type: Number,
     required: [true, 'The product amout is required']
-  }],
+  },
   state: {
     type: String,
     enum: ORDER_STATE,
