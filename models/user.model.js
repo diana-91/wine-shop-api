@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   telephone: {
-    type: Number
+    type: String
   },
   address: {
     type: String
@@ -62,7 +62,6 @@ userSchema.pre('save', function save(next) {
   if (user.isAdmin()) {
        user.role = 'ADMIN';
    }
-
   bcrypt.genSalt(SALT_WORK_FACTOR)
     .then(salt => {
       bcrypt.hash(user.password, salt)

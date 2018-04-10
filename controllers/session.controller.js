@@ -28,5 +28,5 @@ module.exports.create = (req, res, next) => {
 
 module.exports.destroy = (req, res, next) => {
   req.logout();
-  req.status(200).json({ message: 'Success' });
+  res.status(204).json();
 };
