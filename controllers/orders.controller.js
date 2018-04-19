@@ -27,6 +27,7 @@ module.exports.get = (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   const order = new Order(req.body);
+  console.log(order);
   order.save()
     .then(() => {
       res.status(201).json(order);

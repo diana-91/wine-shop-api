@@ -17,10 +17,10 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  amount: {
+  amount: [{
     type: Number,
     required: [true, 'The product amout is required']
-  },
+  }],
   state: {
     type: String,
     enum: ORDER_STATE,
