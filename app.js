@@ -20,7 +20,6 @@ const sessionRoutes = require('./routes/session.routes');
 var app = express();
 
 app.use(cors(corsConfig));
-app.options(cors());
 
 app.use(logger('dev'));
 
